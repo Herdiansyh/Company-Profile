@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('hero_sections', function (Blueprint $table) {
             $table->id();
+            $table->string('achievement');
+            $table->string('subheading');
+            $table->string('heading');
+            $table->string('path_video');
+            $table->string('banner');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('our_principles', function (Blueprint $table) {
             $table->id();
+            $table->string('subtitle');
+            $table->string('name');
+            $table->string('thumbnail');
+            $table->string('icon');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

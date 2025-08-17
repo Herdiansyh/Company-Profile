@@ -13,6 +13,15 @@ return new class extends Migration
     {
         Schema::create('appointments', function (Blueprint $table) {
             $table->id();
+            $table->string('phone_number');
+            $table->string('name');
+            $table->string('email');
+            $table->date('meeting_at');
+            $table->unsignedBigInteger('budget');
+            $table->text('brief');
+            $table->foreignId('product_id')->constrained()->onDelete('cascade');
+            $table->softDeletes();
+
             $table->timestamps();
         });
     }
