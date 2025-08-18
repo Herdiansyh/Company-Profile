@@ -13,6 +13,7 @@ class CompanyStatisticController extends Controller
     public function index()
     {
         //
+        return ('halman index');
     }
 
     /**
