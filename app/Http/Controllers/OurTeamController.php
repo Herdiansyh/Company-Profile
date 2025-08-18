@@ -10,9 +10,11 @@ class OurTeamController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+      public function index()
     {
         //
+        $teams = OurTeam::orderByDesc('id')->paginate(10);
+        return view('admin.teams.index', compact('teams'));
     }
 
     /**

@@ -10,9 +10,11 @@ class CompanyAboutController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+     public function index()
     {
         //
+        $abouts = CompanyAbout::orderByDesc('id')->paginate(10);
+        return view('admin.abouts.index', compact('abouts'));
     }
 
     /**

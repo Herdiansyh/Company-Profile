@@ -10,9 +10,11 @@ class ProjectClientController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+       public function index()
     {
         //
+        $clients = ProjectClient::orderByDesc('id')->paginate(10);
+        return view('admin.clients.index', compact('clients'));
     }
 
     /**

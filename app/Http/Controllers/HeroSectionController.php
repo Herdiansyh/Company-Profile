@@ -10,9 +10,11 @@ class HeroSectionController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+  public function index()
     {
         //
+        $hero_sections = HeroSection::orderByDesc('id')->paginate(10);
+        return view('admin.hero_sections.index', compact('hero_sections'));
     }
 
     /**
