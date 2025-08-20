@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreClientRequest;
 use App\Models\ProjectClient;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProjectClientController extends Controller
 {
@@ -30,9 +32,27 @@ class ProjectClientController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreClientRequest $request)
     {
         //
+                    //closure-based transaction
+        DB::transaction(function () use ($request) {
+            $validated = $request->validated();
+            
+            if($request->hasFile('avatar')) {
+                $avatarpath = $request->file('avatar')->store('avatars', 'public');
+                $validated['avatar'] = $avatarpath;
+            }
+            if($request->hasFile('logo')) {
+                $logopath = $request->file('logo')->store('logos', 'public');
+                $validated['logo'] = $logopath;
+            }
+            $newDataRecord = ProjectClient::create($validated);
+
+        });
+
+        return redirect()->route('admin.clients.index');
+  
     }
 
     /**
@@ -62,8 +82,13 @@ class ProjectClientController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ProjectClient $projectClient)
+    public function destroy(ProjectClient $client)
     {
         //
+           DB::transaction(function () use ($client) {
+            $client->delete();
+        });
+        return redirect()->route('admin.clients.index');
+   
     }
 }

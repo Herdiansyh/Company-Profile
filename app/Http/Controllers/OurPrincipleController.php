@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePrincipleRequest;
 use App\Models\OurPrinciple;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class OurPrincipleController extends Controller
 {
@@ -30,9 +32,27 @@ class OurPrincipleController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StorePrincipleRequest $request)
     {
         //
+              //closure-based transaction
+        DB::transaction(function () use ($request) {
+            $validated = $request->validated();
+            
+            if($request->hasFile('icon')) {
+                $iconpath = $request->file('icon')->store('icons', 'public');
+                $validated['icon'] = $iconpath;
+            }
+            if($request->hasFile('thumbnail')) {
+                $thumbnailpath = $request->file('thumbnail')->store('thumbnails', 'public');
+                $validated['thumbnail'] = $thumbnailpath;
+            }
+            $newDataRecord = OurPrinciple::create($validated);
+
+        });
+
+        return redirect()->route('admin.principles.index');
+  
     }
 
     /**
@@ -41,6 +61,7 @@ class OurPrincipleController extends Controller
     public function show(OurPrinciple $ourPrinciple)
     {
         //
+
     }
 
     /**
@@ -62,8 +83,13 @@ class OurPrincipleController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(OurPrinciple $ourPrinciple)
+    public function destroy(OurPrinciple $principle)
     {
         //
+        DB::transaction(function () use ($principle) {
+            $principle->delete();
+        });
+        return redirect()->route('admin.principles.index');
+   
     }
 }

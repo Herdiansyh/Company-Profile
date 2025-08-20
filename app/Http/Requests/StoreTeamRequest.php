@@ -26,7 +26,7 @@ class StoreTeamRequest extends FormRequest
             'name' => ['required', 'string', 'max:255'],
             'occupation' => ['required', 'string', 'max:255'],
             'location' => ['required', 'string', 'max:255'],
-            'thumbnail' => ['required', 'image', 'mimes:jpeg,png,jpg'], 
+            'avatar' => ['required', 'image', 'mimes:jpeg,png,jpg'], 
         ];
     }
 }

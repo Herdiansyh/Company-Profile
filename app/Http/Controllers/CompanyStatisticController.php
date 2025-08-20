@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreStatisticRequest;
 use App\Models\CompanyStatistic;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use PhpParser\Node\Stmt\Return_;
 
 class CompanyStatisticController extends Controller
 {
@@ -30,9 +33,24 @@ class CompanyStatisticController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreStatisticRequest $request)
     {
         //
+        //closure-based transaction
+        DB::transaction(function () use ($request) {
+            $validated = $request->validated();
+            
+            if($request->hasFile('icon')) {
+                $iconpath = $request->file('icon')->store('icons', 'public');
+                $validated['icon'] = $iconpath;
+            }
+            $newDataRecord = CompanyStatistic::create($validated);
+
+        });
+
+        return redirect()->route('admin.statistics.index');
+
+
     }
 
     /**
@@ -62,8 +80,12 @@ class CompanyStatisticController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(CompanyStatistic $companyStatistic)
+    public function destroy(CompanyStatistic $statistic)
     {
         //
+        DB::transaction(function () use ($statistic) {
+            $statistic->delete();
+        });
+        return redirect()->route('admin.statistics.index');
     }
 }
