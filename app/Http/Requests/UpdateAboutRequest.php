@@ -26,7 +26,7 @@ class UpdateAboutRequest extends FormRequest
             'name' => ['required', 'string', 'max:255'],
             'type' => ['required', 'string', 'max:255'],
             'thumbnail' => ['sometimes', 'image', 'mimes:jpeg,png,jpg'], // Assuming max size is 2MB
-            'keypoints.*' => ' required'|'string'|'max:255',//bisa juga seperti ini menggunakan |
+            'keypoints.*' => ' required|string|max:255',//bisa juga seperti ini menggunakan |
             
         ];
     }

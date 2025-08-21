@@ -8,32 +8,42 @@
     <div class="py-12">
         <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden p-10 shadow-sm sm:rounded-lg"> 
-                
-                <form method="POST" action=" " enctype="multipart/form-data"> 
+                  @if ($errors->any())
+                    @foreach ($errors as $error )
+                    <div class="py-3 w-full rounded-3xl bg-red-500  text-white">
+                    {{ $error }}
+                    </div>
+                    
+                    @endforeach
+                    
+                @endif
+                <form method="POST" action="{{ route('admin.principles.update', $principle) }} " enctype="multipart/form-data"> 
+                    @csrf
+                    @method('PUT')
                     <div>
                         <x-input-label for="name" :value="__('Name')" />
-                        <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" 
+                        <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" value="{{ $principle->name }} "
                          required autofocus autocomplete="name" />
                         <x-input-error :messages="$errors->get('name')" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
                         <x-input-label for="thumbnail" :value="__('thumbnail')" />
-                        <img src=" " alt="" class="rounded-2xl object-cover w-[90px] h-[90px]">
+                        <img src="{{ Storage::url($principle->thumbnail) }} " alt="" class="rounded-2xl object-cover w-[90px] h-[90px]">
                         <x-text-input id="thumbnail" class="block mt-1 w-full" type="file" name="thumbnail" autofocus autocomplete="thumbnail" />
                         <x-input-error :messages="$errors->get('thumbnail')" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
                         <x-input-label for="icon" :value="__('icon')" />
-                        <img src=" " alt="" class="rounded-2xl object-cover w-[90px] h-[90px]">
+                        <img src="{{ Storage::url($principle->icon) }} " alt="" class="rounded-2xl object-cover w-[90px] h-[90px]">
                         <x-text-input id="icon" class="block mt-1 w-full" type="file" name="icon" autofocus autocomplete="icon" />
                         <x-input-error :messages="$errors->get('icon')" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
                         <x-input-label for="subtitle" :value="__('subtitle')" />
-                        <textarea name="subtitle" id="subtitle" cols="30" rows="5" class="border border-slate-300 rounded-xl w-full"> </textarea>
+                        <textarea name="subtitle" id="subtitle" cols="30" rows="5" class="border border-slate-300 rounded-xl w-full">{{ $principle->subtitle }} </textarea>
                         <x-input-error :messages="$errors->get('subtitle')" class="mt-2" />
                     </div>
 
