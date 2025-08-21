@@ -31,16 +31,19 @@
             </ul>
             <a href="" class="bg-cp-dark-blue p-[14px_20px] w-fit rounded-xl hover:shadow-[0_12px_30px_0_#312ECB66] transition-all duration-300 font-bold text-white">Get a Quote</a>
         </nav>
+        @forelse ($hero_sections as $hero_section )
+
+        <input type="hidden" name="path_video" id="path_video" value="{{ $hero_section->path_video }}">
         <div id="Hero" class="flex flex-col gap-[30px] mt-20 pb-20">
           <div class="flex items-center bg-white p-[8px_16px] gap-[10px] rounded-full w-fit">
             <div class="w-5 h-5 flex shrink-0 overflow-hidden">
               <img src="{{asset('assets/icons/crown.svg')}}" class="object-contain" alt="icon">
             </div>
-            <p class="font-semibold text-sm">We reached 10,000 huge buildings in 2024</p>
+            <p class="font-semibold text-sm">{{ $hero_section->achievement }}</p>
           </div>
           <div class="flex flex-col gap-[10px]">
-            <h1 class="font-extrabold text-[50px] leading-[65px] max-w-[536px]">Help Build Biggest <br> Dream From Scratch</h1>
-            <p class="text-cp-light-grey leading-[30px] max-w-[437px]">Shayna is an award-winning construction company with a team of skilled craftsmen and women who have over 100 years of combined experience.</p>
+            <h1 class="font-extrabold text-[50px] leading-[65px] max-w-[536px]">{{ $hero_section->heading }}</h1>
+            <p class="text-cp-light-grey leading-[30px] max-w-[437px]">{{ $hero_section->subheading }}</p>
           </div>
           <div class="flex items-center gap-4">
             <a href="" class="bg-cp-dark-blue p-5 w-fit rounded-xl hover:shadow-[0_12px_30px_0_#312ECB66] transition-all duration-300 font-bold text-white">Explore Now</a>
@@ -54,8 +57,11 @@
         </div>
     </div>
     <div class="absolute w-[43%] h-full top-0 right-0 overflow-hidden z-0">
-        <img src="{{asset('assets/backgrounds/banner.jpg')}}" class="object-cover w-full h-full" alt="banner">
+        <img src="{{Storage::url($hero_section->banner)}}" class="object-cover w-full h-full" alt="banner">
     </div>
+        @empty
+            <p>belum ada data hero section</p>
+        @endforelse
   </div>
   <div id="Clients" class="container max-w-[1130px] mx-auto flex flex-col justify-center text-center gap-5 mt-20">
     <h2 class="font-bold text-lg">Trusted by 500+ Top Leaders Worldwide</h2>
@@ -116,127 +122,68 @@
       <a href="" class="bg-cp-black p-[14px_20px] w-fit rounded-xl font-bold text-white">Explore More</a>
     </div>
     <div class="flex flex-wrap items-center gap-[30px] justify-center">
-      <div class="card w-[356.67px] flex flex-col bg-white border border-[#E8EAF2] rounded-[20px] gap-[30px] overflow-hidden hover:border-cp-dark-blue transition-all duration-300">
-        <div class="thumbnail h-[200px] flex shrink-0 overflow-hidden">
-          <img src="{{asset('assets/thumbnails/cover1.jpg')}}" class="object-cover object-center w-full h-full" alt="thumbnails">
-        </div>
-        <div class="flex flex-col p-[0_30px_30px_30px] gap-5">
-          <div class="w-[55px] h-[55px] flex shrink-0 overflow-hidden">
-            <img src="{{asset('assets/icons/note-favorite.svg')}}" class="w-full h-full object-contain" alt="icon">
-          </div>
-          <div class="flex flex-col gap-1">
-            <p class="title font-bold text-xl leading-[30px]">Prioritize Trust</p>
-            <p class="leading-[30px] text-cp-light-grey">Shayna is an award-winning ametia construction company with lorem</p>
-          </div>
-          <a href="" class="font-semibold text-cp-dark-blue">Learn More</a>
-        </div>
+    @forelse ($principles as $principle )
+        
+    <div class="card w-[356.67px] flex flex-col bg-white border border-[#E8EAF2] rounded-[20px] gap-[30px] overflow-hidden hover:border-cp-dark-blue transition-all duration-300">
+    <div class="thumbnail h-[200px] flex shrink-0 overflow-hidden">
+      <img src="{{Storage::url($principle->thumbnail)}}" class="object-cover object-center w-full h-full" alt="thumbnails">
+    </div>
+    <div class="flex flex-col p-[0_30px_30px_30px] gap-5">
+      <div class="w-[55px] h-[55px] flex shrink-0 overflow-hidden">
+        <img src="{{Storage::url($principle->icon)}}" class="w-full h-full object-contain" alt="icon">
       </div>
-      <div class="card w-[356.67px] flex flex-col bg-white border border-[#E8EAF2] rounded-[20px] gap-[30px] overflow-hidden hover:border-cp-dark-blue transition-all duration-300">
-        <div class="thumbnail h-[200px] flex shrink-0 overflow-hidden">
-          <img src="{{asset('assets/thumbnails/cover2.jpg')}}" class="object-cover object-center w-full h-full" alt="thumbnails">
-        </div>
-        <div class="flex flex-col p-[0_30px_30px_30px] gap-5">
-          <div class="w-[55px] h-[55px] flex shrink-0 overflow-hidden">
-            <img src="{{asset('assets/icons/user-octagon.svg')}}" class="w-full h-full object-contain" alt="icon">
-          </div>
-          <div class="flex flex-col gap-1">
-            <p class="title font-bold text-xl leading-[30px]">Professional People</p>
-            <p class="leading-[30px] text-cp-light-grey">Shayna is an award-winning ametia construction company with lorem</p>
-          </div>
-          <a href="" class="font-semibold text-cp-dark-blue">Learn More</a>
-        </div>
+      <div class="flex flex-col gap-1">
+        <p class="title font-bold text-xl leading-[30px]">{{ $principle->name }}</p>
+        <p class="leading-[30px] text-cp-light-grey">{{ $principle->subtitle }}</p>
       </div>
-      <div class="card w-[356.67px] flex flex-col bg-white border border-[#E8EAF2] rounded-[20px] gap-[30px] overflow-hidden hover:border-cp-dark-blue transition-all duration-300">
-        <div class="thumbnail h-[200px] flex shrink-0 overflow-hidden">
-          <img src="{{asset('assets/thumbnails/cover3.jpg')}}" class="object-cover object-center w-full h-full" alt="thumbnails">
-        </div>
-        <div class="flex flex-col p-[0_30px_30px_30px] gap-5">
-          <div class="w-[55px] h-[55px] flex shrink-0 overflow-hidden">
-            <img src="{{asset('assets/icons/building-4.svg')}}" class="w-full h-full object-contain" alt="icon">
-          </div>
-          <div class="flex flex-col gap-1">
-            <p class="title font-bold text-xl leading-[30px]">Eco Friendly Concept</p>
-            <p class="leading-[30px] text-cp-light-grey">Shayna is an award-winning ametia construction company with lorem</p>
-          </div>
-          <a href="" class="font-semibold text-cp-dark-blue">Learn More</a>
-        </div>
-      </div>
+      <a href="" class="font-semibold text-cp-dark-blue">Learn More</a>
+    </div>
+  </div>
+    @empty
+        <p>belum ada datanya</p>
+    @endforelse
+     
     </div>
   </div>
   <div id="Stats" class="bg-cp-black w-full mt-20">
     <div class="container max-w-[1000px] mx-auto py-10">
       <div class="flex flex-wrap items-center justify-between p-[10px]">
+        @forelse ($statistics as $statistic )
+            
         <div class="card w-[200px] flex flex-col items-center gap-[10px] text-center">
           <div class="w-[55px] h-[55px] flex shrink-0 overflow-hidden">
-            <img src="{{asset('assets/icons/cup.svg')}}" class="object-contain w-full h-full" alt="icon">
+            <img src="{{ Storage::url($statistic->icon) }}" class="object-contain w-full h-full" alt="icon">
           </div>
-          <p class="text-cp-pale-orange font-bold text-4xl leading-[54px]">189.409</p>
-          <p class="text-cp-light-grey">Award-winning Buildings</p>
+          <p class="text-cp-pale-orange font-bold text-4xl leading-[54px]">{{ $statistic->goal }}</p>
+          <p class="text-cp-light-grey">{{ $statistic->name }}</p>
         </div>
-        <div class="card w-[200px] flex flex-col items-center gap-[10px] text-center">
-          <div class="w-[55px] h-[55px] flex shrink-0 overflow-hidden">
-            <img src="{{asset('assets/icons/buildings.svg')}}" class="object-contain w-full h-full" alt="icon">
-          </div>
-          <p class="text-cp-pale-orange font-bold text-4xl leading-[54px]">198</p>
-          <p class="text-cp-light-grey">HQ Worldwide</p>
-        </div>
-        <div class="card w-[200px] flex flex-col items-center gap-[10px] text-center">
-          <div class="w-[55px] h-[55px] flex shrink-0 overflow-hidden">
-            <img src="{{asset('assets/icons/status-up.svg')}}" class="object-contain w-full h-full" alt="icon">
-          </div>
-          <p class="text-cp-pale-orange font-bold text-4xl leading-[54px]">$512bn</p>
-          <p class="text-cp-light-grey">Success Investments</p>
-        </div>
-        <div class="card w-[200px] flex flex-col items-center gap-[10px] text-center">
-          <div class="w-[55px] h-[55px] flex shrink-0 overflow-hidden">
-            <img src="{{asset('assets/icons/star.svg')}}" class="object-contain w-full h-full" alt="icon">
-          </div>
-          <p class="text-cp-pale-orange font-bold text-4xl leading-[54px]">4.9/5</p>
-          <p class="text-cp-light-grey">Honest Reviews</p>
-        </div>
+        @empty
+            <p>belum ada data terbaru</p>
+        @endforelse
+       
       </div>
     </div>
   </div>
   <div id="Products" class="container max-w-[1130px] mx-auto flex flex-col gap-20 mt-20">
+    @forelse ($products as $product )
+        
     <div class="product flex flex-wrap justify-center items-center gap-[60px] even:flex-row-reverse">
       <div class="w-[470px] h-[550px] flex shrink-0 overflow-hidden">
-        <img src="{{asset('assets/thumbnails/product cover one.png')}}" class="w-full h-full object-contain" alt="thumbnail">
+        <img src="{{Storage::url($product->thumbnail)}}" class="w-full h-full object-contain" alt="thumbnail">
       </div>
       <div class="flex flex-col gap-[30px] py-[50px] h-fit max-w-[500px]">
-        <p class="badge w-fit bg-cp-pale-blue text-cp-light-blue p-[8px_16px] rounded-full uppercase font-bold text-sm">WORLD TRADE CENTER</p>
+        <p class="badge w-fit bg-cp-pale-blue text-cp-light-blue p-[8px_16px] rounded-full uppercase font-bold text-sm">{{ $product->tagline }}</p>
         <div class="flex flex-col gap-[10px]">
-          <h2 class="font-bold text-4xl leading-[45px]">Office Integrated with Biggest Data Server Center</h2>
-          <p class="leading-[30px] text-cp-light-grey">Lorem ipsum angga’s framework researching amet dolor metrics and perfomance burning rate random says.</p>
+          <h2 class="font-bold text-4xl leading-[45px]">{{ $product->name }}</h2>
+          <p class="leading-[30px] text-cp-light-grey">{{ $product->about }}</p>
         </div>
         <a href="" class="bg-cp-dark-blue p-[14px_20px] w-fit rounded-xl hover:shadow-[0_12px_30px_0_#312ECB66] transition-all duration-300 font-bold text-white">Book Appointment</a>
       </div>
     </div>
-    <div class="product flex flex-wrap justify-center items-center gap-[60px] even:flex-row-reverse">
-      <div class="w-[470px] h-[550px] flex shrink-0 overflow-hidden">
-        <img src="{{asset('assets/thumbnails/product cover two.png')}}" class="w-full h-full object-contain" alt="thumbnail">
-      </div>
-      <div class="flex flex-col gap-[30px] py-[50px] h-fit max-w-[500px]">
-        <p class="badge w-fit bg-cp-pale-blue text-cp-light-blue p-[8px_16px] rounded-full uppercase font-bold text-sm">FAMILY HARMONY</p>
-        <div class="flex flex-col gap-[10px]">
-          <h2 class="font-bold text-4xl leading-[45px]">Beautiful Theme Park Family and Kids Friendly</h2>
-          <p class="leading-[30px] text-cp-light-grey">Lorem ipsum angga’s framework researching amet dolor metrics and perfomance burning rate random says.</p>
-        </div>
-        <a href="" class="bg-cp-dark-blue p-[14px_20px] w-fit rounded-xl hover:shadow-[0_12px_30px_0_#312ECB66] transition-all duration-300 font-bold text-white">Book Appointment</a>
-      </div>
-    </div>
-    <div class="product flex flex-wrap justify-center items-center gap-[60px] even:flex-row-reverse">
-      <div class="w-[470px] h-[550px] flex shrink-0 overflow-hidden">
-        <img src="{{asset('assets/thumbnails/product cover three.png')}}" class="w-full h-full object-contain" alt="thumbnail">
-      </div>
-      <div class="flex flex-col gap-[30px] py-[50px] h-fit max-w-[500px]">
-        <p class="badge w-fit bg-cp-pale-blue text-cp-light-blue p-[8px_16px] rounded-full uppercase font-bold text-sm">ECO-FRIENDLY SPACE</p>
-        <div class="flex flex-col gap-[10px]">
-          <h2 class="font-bold text-4xl leading-[45px]">Public City Center Park with Super Mall & Airport</h2>
-          <p class="leading-[30px] text-cp-light-grey">Lorem ipsum angga’s framework researching amet dolor metrics and perfomance burning rate random says.</p>
-        </div>
-        <a href="" class="bg-cp-dark-blue p-[14px_20px] w-fit rounded-xl hover:shadow-[0_12px_30px_0_#312ECB66] transition-all duration-300 font-bold text-white">Book Appointment</a>
-      </div>
-    </div>
+    @empty
+        <p>belum ada data terbaru</p>
+    @endforelse
+   
   </div>
   <div id="Teams" class="bg-[#F6F7FA] w-full py-20 px-[10px] mt-20">
     <div class="container max-w-[1130px] mx-auto flex flex-col gap-[30px] items-center">
@@ -245,125 +192,29 @@
         <h2 class="font-bold text-4xl leading-[45px] text-center">We Share Same Dreams <br> Change The World</h2>
       </div>
       <div class="teams-card-container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[30px] justify-center">
+        @forelse ($teams as $team )
+            
         <div class="card bg-white flex flex-col h-full justify-center items-center p-[30px] px-[29px] gap-[30px] rounded-[20px] border border-white hover:shadow-[0_10px_30px_0_#D1D4DF80] hover:border-cp-dark-blue transition-all duration-300">
+           
           <div class="w-[100px] h-[100px] flex shrink-0 items-center justify-center rounded-full bg-[linear-gradient(150.55deg,_#007AFF_8.72%,_#312ECB_87.11%)]">
             <div class="w-[90px] h-[90px] rounded-full overflow-hidden">
-              <img src="{{asset('assets/photos/photo1.png')}}" class="object-cover w-full h-full object-center" alt="photo">
+              <img src="{{ Storage::url($team->avatar) }}" class="object-cover w-full h-full object-center" alt="photo">
             </div>
           </div>
           <div class="flex flex-col gap-1 text-center">
-            <p class="font-bold text-xl leading-[30px]">Angga Setiawan</p>
-            <p class="text-cp-light-grey">Chief Executive Officer</p>
+            <p class="font-bold text-xl leading-[30px]">{{ $team->name }}</p>
+            <p class="text-cp-light-grey">{{ $team->occupation }}</p>
           </div>
           <div class="flex items-center justify-center gap-[10px]">
             <div class="w-6 h-6 flex shrink-0">
               <img src="{{asset('assets/icons/global.svg')}}" alt="icon">
             </div>
-            <p class="text-cp-dark-blue font-semibold">Shanghai, China</p>
+            <p class="text-cp-dark-blue font-semibold">{{ $team->location }}</p>
           </div>
-        </div>
-        <div class="card bg-white flex flex-col h-full justify-center items-center p-[30px] px-[29px] gap-[30px] rounded-[20px] border border-white hover:shadow-[0_10px_30px_0_#D1D4DF80] hover:border-cp-dark-blue transition-all duration-300">
-          <div class="w-[100px] h-[100px] flex shrink-0 items-center justify-center rounded-full bg-[linear-gradient(150.55deg,_#007AFF_8.72%,_#312ECB_87.11%)]">
-            <div class="w-[90px] h-[90px] rounded-full overflow-hidden">
-              <img src="{{asset('assets/photos/photo2.png')}}" class="object-cover w-full h-full object-center" alt="photo">
-            </div>
-          </div>
-          <div class="flex flex-col gap-1 text-center">
-            <p class="font-bold text-xl leading-[30px]">Shayna Liza</p>
-            <p class="text-cp-light-grey">Product Manager</p>
-          </div>
-          <div class="flex items-center justify-center gap-[10px]">
-            <div class="w-6 h-6 flex shrink-0">
-              <img src="{{asset('assets/icons/global.svg')}}" alt="icon">
-            </div>
-            <p class="text-cp-dark-blue font-semibold">Bali, Indonesia</p>
-          </div>
-        </div>
-        <div class="card bg-white flex flex-col h-full justify-center items-center p-[30px] px-[29px] gap-[30px] rounded-[20px] border border-white hover:shadow-[0_10px_30px_0_#D1D4DF80] hover:border-cp-dark-blue transition-all duration-300">
-          <div class="w-[100px] h-[100px] flex shrink-0 items-center justify-center rounded-full bg-[linear-gradient(150.55deg,_#007AFF_8.72%,_#312ECB_87.11%)]">
-            <div class="w-[90px] h-[90px] rounded-full overflow-hidden">
-              <img src="{{asset('assets/photos/photo3.png')}}" class="object-cover w-full h-full object-center" alt="photo">
-            </div>
-          </div>
-          <div class="flex flex-col gap-1 text-center">
-            <p class="font-bold text-xl leading-[30px]">Bruno Oleo</p>
-            <p class="text-cp-light-grey">Customer Relations</p>
-          </div>
-          <div class="flex items-center justify-center gap-[10px]">
-            <div class="w-6 h-6 flex shrink-0">
-              <img src="{{asset('assets/icons/global.svg')}}" alt="icon">
-            </div>
-            <p class="text-cp-dark-blue font-semibold">Orchard, Singapore</p>
-          </div>
-        </div>
-        <div class="card bg-white flex flex-col h-full justify-center items-center p-[30px] px-[29px] gap-[30px] rounded-[20px] border border-white hover:shadow-[0_10px_30px_0_#D1D4DF80] hover:border-cp-dark-blue transition-all duration-300">
-          <div class="w-[100px] h-[100px] flex shrink-0 items-center justify-center rounded-full bg-[linear-gradient(150.55deg,_#007AFF_8.72%,_#312ECB_87.11%)]">
-            <div class="w-[90px] h-[90px] rounded-full overflow-hidden">
-              <img src="{{asset('assets/photos/photo4.png')}}" class="object-cover w-full h-full object-center" alt="photo">
-            </div>
-          </div>
-          <div class="flex flex-col gap-1 text-center">
-            <p class="font-bold text-xl leading-[30px]">Sami Kimi</p>
-            <p class="text-cp-light-grey">Senior 3D Designer</p>
-          </div>
-          <div class="flex items-center justify-center gap-[10px]">
-            <div class="w-6 h-6 flex shrink-0">
-              <img src="{{asset('assets/icons/global.svg')}}" alt="icon">
-            </div>
-            <p class="text-cp-dark-blue font-semibold">Ho Chi Min, Vietnam</p>
-          </div>
-        </div>
-        <div class="card bg-white flex flex-col h-full justify-center items-center p-[30px] px-[29px] gap-[30px] rounded-[20px] border border-white hover:shadow-[0_10px_30px_0_#D1D4DF80] hover:border-cp-dark-blue transition-all duration-300">
-          <div class="w-[100px] h-[100px] flex shrink-0 items-center justify-center rounded-full bg-[linear-gradient(150.55deg,_#007AFF_8.72%,_#312ECB_87.11%)]">
-            <div class="w-[90px] h-[90px] rounded-full overflow-hidden">
-              <img src="{{asset('assets/photos/photo5.png')}}" class="object-cover w-full h-full object-center" alt="photo">
-            </div>
-          </div>
-          <div class="flex flex-col gap-1 text-center">
-            <p class="font-bold text-xl leading-[30px]">Wibowo Putra</p>
-            <p class="text-cp-light-grey">Senior 3D Designer</p>
-          </div>
-          <div class="flex items-center justify-center gap-[10px]">
-            <div class="w-6 h-6 flex shrink-0">
-              <img src="{{asset('assets/icons/global.svg')}}" alt="icon">
-            </div>
-            <p class="text-cp-dark-blue font-semibold">Ho Chi Min, Vietnam</p>
-          </div>
-        </div>
-        <div class="card bg-white flex flex-col h-full justify-center items-center p-[30px] px-[29px] gap-[30px] rounded-[20px] border border-white hover:shadow-[0_10px_30px_0_#D1D4DF80] hover:border-cp-dark-blue transition-all duration-300">
-          <div class="w-[100px] h-[100px] flex shrink-0 items-center justify-center rounded-full bg-[linear-gradient(150.55deg,_#007AFF_8.72%,_#312ECB_87.11%)]">
-            <div class="w-[90px] h-[90px] rounded-full overflow-hidden">
-              <img src="{{asset('assets/photos/photo6.png')}}" class="object-cover w-full h-full object-center" alt="photo">
-            </div>
-          </div>
-          <div class="flex flex-col gap-1 text-center">
-            <p class="font-bold text-xl leading-[30px]">Putri Emily</p>
-            <p class="text-cp-light-grey">Chief Executive Officer</p>
-          </div>
-          <div class="flex items-center justify-center gap-[10px]">
-            <div class="w-6 h-6 flex shrink-0">
-              <img src="{{asset('assets/icons/global.svg')}}" alt="icon">
-            </div>
-            <p class="text-cp-dark-blue font-semibold">Shanghai, China</p>
-          </div>
-        </div>
-        <div class="card bg-white flex flex-col h-full justify-center items-center p-[30px] px-[29px] gap-[30px] rounded-[20px] border border-white hover:shadow-[0_10px_30px_0_#D1D4DF80] hover:border-cp-dark-blue transition-all duration-300">
-          <div class="w-[100px] h-[100px] flex shrink-0 items-center justify-center rounded-full bg-[linear-gradient(150.55deg,_#007AFF_8.72%,_#312ECB_87.11%)]">
-            <div class="w-[90px] h-[90px] rounded-full overflow-hidden">
-              <img src="{{asset('assets/photos/photo7.png')}}" class="object-cover w-full h-full object-center" alt="photo">
-            </div>
-          </div>
-          <div class="flex flex-col gap-1 text-center">
-            <p class="font-bold text-xl leading-[30px]">Yuyan Chin</p>
-            <p class="text-cp-light-grey">Product Manager</p>
-          </div>
-          <div class="flex items-center justify-center gap-[10px]">
-            <div class="w-6 h-6 flex shrink-0">
-              <img src="{{asset('assets/icons/global.svg')}}" alt="icon">
-            </div>
-            <p class="text-cp-dark-blue font-semibold">Bali, Indonesia</p>
-          </div>
-        </div>
+        </div> @empty
+                <p>belum ada data terbaru</p>
+            @endforelse
+      
         <a href="team.html" class="view-all-card">
           <div class="card bg-white flex flex-col h-full justify-center items-center p-[30px] gap-[30px] rounded-[20px] border border-white hover:shadow-[0_10px_30px_0_#D1D4DF80] hover:border-cp-dark-blue transition-all duration-300">
             <div class="w-[60px] h-[60px] flex shrink-0">
@@ -384,7 +235,10 @@
       <h2 class="font-bold text-4xl leading-[45px] text-center">Our Satisfied Clients<br>From Worldwide Company</h2>
     </div>
     <div class="main-carousel w-full">
-      <div class="carousel-card container max-w-[1130px] w-full flex flex-wrap justify-between items-center lg:mx-[calc((100vw-1130px)/2)]">
+        @forelse ($testimonials as $testimonial )
+            
+       
+        <div class="carousel-card container max-w-[1130px] w-full flex flex-wrap justify-between items-center lg:mx-[calc((100vw-1130px)/2)]">
         <div class="testimonial-container flex flex-col gap-[112px] w-[565px]">
           <div class="flex flex-col gap-[30px]">
             <div class="h-9 overflow-hidden">
@@ -394,16 +248,16 @@
               <div class="absolute top-0 left-0">
                 <img src="{{asset('assets/icons/quote.svg')}}" alt="icon">
               </div>
-              <p class="font-semibold text-2xl leading-[46px] relative z-10">Shayna is a leading construction company in Melbourne, building new homes and commercial projects that are durable, functional and beautiful.</p>
+              <p class="font-semibold text-2xl leading-[46px] relative z-10">{{ $testimonial->message }}</p>
             </div>
             <div class="flex items-center justify-between pl-[30px]">
               <div class="flex items-center gap-6">
                 <div class="w-[60px] h-[60px] flex shrink-0 rounded-full overflow-hidden">
-                  <img src="{{asset('assets/photos/photo3.png')}}" class="w-full h-full object-cover" alt="photo">
+                  <img src="{{Storage::url($testimonial->client->avatar)}}" class="w-full h-full object-cover" alt="photo">
                 </div>
                 <div class="flex flex-col justify-center gap-1">
-                  <p class="font-bold">Sirania</p>
-                  <p class="text-sm text-cp-light-grey">CRO Kamikapan</p>
+                  <p class="font-bold">{{ $testimonial->client->name }}</p>
+                  <p class="text-sm text-cp-light-grey">{{ $testimonial->client->occupation }}</p>
                 </div>
               </div>
               <div class="flex flex-nowrap">
@@ -429,201 +283,12 @@
           </div>
         </div>
         <div class="testimonial-thumbnail w-[470px] h-[550px] rounded-[20px] overflow-hidden bg-[#D9D9D9]">
-          <img src="{{asset('assets/backgrounds/banner.jpg')}}" class="w-full h-full object-cover object-center" alt="thumbnail">
+          <img src="{{Storage::url($testimonial->banner)}}" class="w-full h-full object-cover object-center" alt="thumbnail">
         </div>
       </div>
-      <div class="carousel-card container max-w-[1130px] w-full flex flex-wrap justify-between items-center lg:mx-[calc((100vw-1130px)/2)]">
-        <div class="testimonial-container flex flex-col gap-[112px] w-[565px]">
-          <div class="flex flex-col gap-[30px]">
-            <div class="h-9 overflow-hidden">
-              <img src="{{asset('assets/logo/logo-51.svg')}}" class="object-contain" alt="icon">
-            </div>
-            <div class="relative pt-[27px] pl-[30px]">
-              <div class="absolute top-0 left-0">
-                <img src="{{asset('assets/icons/quote.svg')}}" alt="icon">
-              </div>
-              <p class="font-semibold text-2xl leading-[46px] relative z-10">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil distinctio quasi blanditiis dolorum iste velit. Quo alias non ab debitis!</p>
-            </div>
-            <div class="flex items-center justify-between pl-[30px]">
-              <div class="flex items-center gap-6">
-                <div class="w-[60px] h-[60px] flex shrink-0 rounded-full overflow-hidden">
-                  <img src="{{asset('assets/photos/photo2.png')}}" class="w-full h-full object-cover" alt="photo">
-                </div>
-                <div class="flex flex-col justify-center gap-1">
-                  <p class="font-bold">Bruno Oleo</p>
-                  <p class="text-sm text-cp-light-grey">Customer Relations</p>
-                </div>
-              </div>
-              <div class="flex flex-nowrap">
-                <div class="w-6 h-6 flex shrink-0">
-                  <img src="{{asset('assets/icons/Star-rating.svg')}}" alt="star">
-                </div>
-                <div class="w-6 h-6 flex shrink-0">
-                  <img src="{{asset('assets/icons/Star-rating.svg')}}" alt="star">
-                </div>
-                <div class="w-6 h-6 flex shrink-0">
-                  <img src="{{asset('assets/icons/Star-rating.svg')}}" alt="star">
-                </div>
-                <div class="w-6 h-6 flex shrink-0">
-                  <img src="{{asset('assets/icons/Star-rating.svg')}}" alt="star">
-                </div>
-                <div class="w-6 h-6 flex shrink-0">
-                  <img src="{{asset('assets/icons/Star-rating.svg')}}" alt="star">
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-indicator flex items-center justify-center gap-2 h-4 shrink-0">
-          </div>
-        </div>
-        <div class="testimonial-thumbnail w-[470px] h-[550px] rounded-[20px] overflow-hidden bg-[#D9D9D9]">
-          <img src="{{asset('assets/thumbnails/cover1.jpg')}}" class="w-full h-full object-cover object-center" alt="thumbnail">
-        </div>
-      </div>
-      <div class="carousel-card container max-w-[1130px] w-full flex flex-wrap justify-between items-center lg:mx-[calc((100vw-1130px)/2)]">
-        <div class="testimonial-container flex flex-col gap-[112px] w-[565px]">
-          <div class="flex flex-col gap-[30px]">
-            <div class="h-9 overflow-hidden">
-              <img src="{{asset('assets/logo/logo-54.svg')}}" class="object-contain" alt="icon">
-            </div>
-            <div class="relative pt-[27px] pl-[30px]">
-              <div class="absolute top-0 left-0">
-                <img src="{{asset('assets/icons/quote.svg')}}" alt="icon">
-              </div>
-              <p class="font-semibold text-2xl leading-[46px] relative z-10">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Distinctio officia, reprehenderit magni obcaecati praesentium quasi iusto rerum.</p>
-            </div>
-            <div class="flex items-center justify-between pl-[30px]">
-              <div class="flex items-center gap-6">
-                <div class="w-[60px] h-[60px] flex shrink-0 rounded-full overflow-hidden">
-                  <img src="{{asset('assets/photos/photo4.png')}}" class="w-full h-full object-cover" alt="photo">
-                </div>
-                <div class="flex flex-col justify-center gap-1">
-                  <p class="font-bold">Sami Kimi</p>
-                  <p class="text-sm text-cp-light-grey">Senior 3D Designer</p>
-                </div>
-              </div>
-              <div class="flex flex-nowrap">
-                <div class="w-6 h-6 flex shrink-0">
-                  <img src="{{asset('assets/icons/Star-rating.svg')}}" alt="star">
-                </div>
-                <div class="w-6 h-6 flex shrink-0">
-                  <img src="{{asset('assets/icons/Star-rating.svg')}}" alt="star">
-                </div>
-                <div class="w-6 h-6 flex shrink-0">
-                  <img src="{{asset('assets/icons/Star-rating.svg')}}" alt="star">
-                </div>
-                <div class="w-6 h-6 flex shrink-0">
-                  <img src="{{asset('assets/icons/Star-rating.svg')}}" alt="star">
-                </div>
-                <div class="w-6 h-6 flex shrink-0">
-                  <img src="{{asset('assets/icons/Star-rating.svg')}}" alt="star">
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-indicator flex items-center justify-center gap-2 h-4 shrink-0">
-          </div>
-        </div>
-        <div class="testimonial-thumbnail w-[470px] h-[550px] rounded-[20px] overflow-hidden bg-[#D9D9D9]">
-          <img src="{{asset('assets/thumbnails/cover2.jpg')}}" class="w-full h-full object-cover object-center" alt="thumbnail">
-        </div>
-      </div>
-      <div class="carousel-card container max-w-[1130px] w-full flex flex-wrap justify-between items-center lg:mx-[calc((100vw-1130px)/2)]">
-        <div class="testimonial-container flex flex-col gap-[112px] w-[565px]">
-          <div class="flex flex-col gap-[30px]">
-            <div class="h-9 overflow-hidden">
-              <img src="{{asset('assets/logo/logo-44.svg')}}" class="object-contain" alt="icon">
-            </div>
-            <div class="relative pt-[27px] pl-[30px]">
-              <div class="absolute top-0 left-0">
-                <img src="{{asset('assets/icons/quote.svg')}}" alt="icon">
-              </div>
-              <p class="font-semibold text-2xl leading-[46px] relative z-10">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae, rem!</p>
-            </div>
-            <div class="flex items-center justify-between pl-[30px]">
-              <div class="flex items-center gap-6">
-                <div class="w-[60px] h-[60px] flex shrink-0 rounded-full overflow-hidden">
-                  <img src="{{asset('assets/photos/photo7.png')}}" class="w-full h-full object-cover" alt="photo">
-                </div>
-                <div class="flex flex-col justify-center gap-1">
-                  <p class="font-bold">Yuyan Chin</p>
-                  <p class="text-sm text-cp-light-grey">Product Manager</p>
-                </div>
-              </div>
-              <div class="flex flex-nowrap">
-                <div class="w-6 h-6 flex shrink-0">
-                  <img src="{{asset('assets/icons/Star-rating.svg')}}" alt="star">
-                </div>
-                <div class="w-6 h-6 flex shrink-0">
-                  <img src="{{asset('assets/icons/Star-rating.svg')}}" alt="star">
-                </div>
-                <div class="w-6 h-6 flex shrink-0">
-                  <img src="{{asset('assets/icons/Star-rating.svg')}}" alt="star">
-                </div>
-                <div class="w-6 h-6 flex shrink-0">
-                  <img src="{{asset('assets/icons/Star-rating.svg')}}" alt="star">
-                </div>
-                <div class="w-6 h-6 flex shrink-0">
-                  <img src="{{asset('assets/icons/Star-rating.svg')}}" alt="star">
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-indicator flex items-center justify-center gap-2 h-4 shrink-0">
-          </div>
-        </div>
-        <div class="testimonial-thumbnail w-[470px] h-[550px] rounded-[20px] overflow-hidden bg-[#D9D9D9]">
-          <img src="{{asset('assets/backgrounds/banner.jpg')}}" class="w-full h-full object-cover object-center" alt="thumbnail">
-        </div>
-      </div>
-      <div class="carousel-card container max-w-[1130px] w-full flex flex-wrap justify-between items-center lg:mx-[calc((100vw-1130px)/2)]">
-        <div class="testimonial-container flex flex-col gap-[112px] w-[565px]">
-          <div class="flex flex-col gap-[30px]">
-            <div class="h-9 overflow-hidden">
-              <img src="{{asset('assets/logo/logo-54.svg')}}" class="object-contain" alt="icon">
-            </div>
-            <div class="relative pt-[27px] pl-[30px]">
-              <div class="absolute top-0 left-0">
-                <img src="{{asset('assets/icons/quote.svg')}}" alt="icon">
-              </div>
-              <p class="font-semibold text-2xl leading-[46px] relative z-10">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis quia adipisci voluptatum deleniti rerum, explicabo aperiam illum porro voluptatibus qui expedita sapiente sed sequi animi!</p>
-            </div>
-            <div class="flex items-center justify-between pl-[30px]">
-              <div class="flex items-center gap-6">
-                <div class="w-[60px] h-[60px] flex shrink-0 rounded-full overflow-hidden">
-                  <img src="{{asset('assets/photos/photo6.png')}}" class="w-full h-full object-cover" alt="photo">
-                </div>
-                <div class="flex flex-col justify-center gap-1">
-                  <p class="font-bold">Putri Emily</p>
-                  <p class="text-sm text-cp-light-grey">Chief Executive Officer</p>
-                </div>
-              </div>
-              <div class="flex flex-nowrap">
-                <div class="w-6 h-6 flex shrink-0">
-                  <img src="{{asset('assets/icons/Star-rating.svg')}}" alt="star">
-                </div>
-                <div class="w-6 h-6 flex shrink-0">
-                  <img src="{{asset('assets/icons/Star-rating.svg')}}" alt="star">
-                </div>
-                <div class="w-6 h-6 flex shrink-0">
-                  <img src="{{asset('assets/icons/Star-rating.svg')}}" alt="star">
-                </div>
-                <div class="w-6 h-6 flex shrink-0">
-                  <img src="{{asset('assets/icons/Star-rating.svg')}}" alt="star">
-                </div>
-                <div class="w-6 h-6 flex shrink-0">
-                  <img src="{{asset('assets/icons/Star-rating.svg')}}" alt="star">
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-indicator flex items-center justify-center gap-2 h-4 shrink-0">
-          </div>
-        </div>
-        <div class="testimonial-thumbnail w-[470px] h-[550px] rounded-[20px] overflow-hidden bg-[#D9D9D9]">
-          <img src="{{asset('assets/thumbnails/cover3.jpg')}}" class="w-full h-full object-cover object-center" alt="thumbnail">
-        </div>
-      </div>
+  @empty
+            <p>belum ada data</p>
+        @endforelse
     </div>
   </div>
   <div id="Awards" class="container max-w-[1130px] mx-auto flex flex-col gap-[30px] mt-20">
