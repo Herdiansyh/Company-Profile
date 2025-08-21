@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 use PHPUnit\Framework\Attributes\Group;
 
 Route::get('/',[FrontController::class, 'index'])->name('front.index');
+Route::get('/team',[FrontController::class, 'team'])->name('front.team');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

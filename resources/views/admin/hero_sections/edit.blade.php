@@ -8,29 +8,28 @@
     <div class="py-12">
         <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden p-10 shadow-sm sm:rounded-lg"> 
-                 @if ($errors->any())
-                    @foreach ($errors as $error )
-                    <div class="py-3 w-full rounded-3xl bg-red-500  text-white">
-                    {{ $error }}
-                    </div>
-                    
-                    @endforeach
-                    
-                @endif
+       @if ($errors->any())
+    @foreach ($errors->all() as $error)
+        <div class="py-3 w-full rounded-3xl bg-red-500 text-white mb-2">
+            {{ $error }}
+        </div>
+    @endforeach
+@endif
+
                 <form method="POST" action="{{ route('admin.hero_sections.update', $hero_section) }} " enctype="multipart/form-data"> 
                     @csrf
                     @method('PUT')
                     <div>
                         <x-input-label for="heading" :value="__('heading')" />
                         <x-text-input id="heading" class="block mt-1 w-full" type="text" name="heading" 
-                          required autofocus autocomplete="heading"  value="{{ $hero_section->heading }}/>
+                           autofocus autocomplete="heading"  value="{{ $hero_section->heading }}"/>
                         <x-input-error :messages="$errors->get('heading')" class="mt-2" />
                     </div>
 
                     <div class="mt-4">
                         <x-input-label for="banner" :value="__('banner')" />
                         <img src="{{ Storage::url($hero_section->banner) }} " alt="" class="rounded-2xl object-cover w-[90px] h-[90px]">
-                        <x-text-input id="banner" class="block mt-1 w-full" type="file" name="banner" required autofocus autocomplete="banner" />
+                        <x-text-input id="banner" class="block mt-1 w-full" type="file" name="banner"  autofocus autocomplete="banner" />
                         <x-input-error :messages="$errors->get('banner')" class="mt-2" />
                     </div>
 
