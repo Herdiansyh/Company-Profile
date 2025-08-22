@@ -2,35 +2,7 @@
 @section('content')
   <div id="header" class="bg-[#F6F7FA] relative overflow-hidden">
     <div class="container max-w-[1130px] mx-auto relative pt-10 z-10">
-        <nav class="flex flex-wrap items-center justify-between bg-white p-[20px_30px] rounded-[20px] gap-y-3">
-            <div class="flex items-center gap-3">
-                <div class="flex shrink-0 h-[43px] overflow-hidden">
-                    <img src="{{asset('assets/logo/logo.svg')}}" class="object-contain w-full h-full" alt="logo">
-                </div>
-                <div class="flex flex-col">
-                  <p id="CompanyName" class="font-extrabold text-xl leading-[30px]">ShaynaComp</p>
-                  <p id="CompanyTagline" class="text-sm text-cp-light-grey">Build Futuristic Dreams</p>
-                </div>
-            </div>
-            <ul class="flex flex-wrap items-center gap-[30px]">
-              <li class="font-semibold hover:text-cp-dark-blue transition-all duration-300 text-cp-dark-blue">
-                <a href="index.html">Home</a>
-              </li>
-              <li class="font-semibold hover:text-cp-dark-blue transition-all duration-300">
-                <a href="">Products</a>
-              </li>
-              <li class="font-semibold hover:text-cp-dark-blue transition-all duration-300">
-                <a href="">Company</a>
-              </li>
-              <li class="font-semibold hover:text-cp-dark-blue transition-all duration-300">
-                <a href="">Blog</a>
-              </li>
-              <li class="font-semibold hover:text-cp-dark-blue transition-all duration-300">
-                <a href="about.html">About</a>
-              </li>
-            </ul>
-            <a href="" class="bg-cp-dark-blue p-[14px_20px] w-fit rounded-xl hover:shadow-[0_12px_30px_0_#312ECB66] transition-all duration-300 font-bold text-white">Get a Quote</a>
-        </nav>
+     <x-navbar/>
         @forelse ($hero_sections as $hero_section )
 
         <input type="hidden" name="path_video" id="path_video" value="{{ $hero_section->path_video }}">
@@ -177,7 +149,7 @@
           <h2 class="font-bold text-4xl leading-[45px]">{{ $product->name }}</h2>
           <p class="leading-[30px] text-cp-light-grey">{{ $product->about }}</p>
         </div>
-        <a href="" class="bg-cp-dark-blue p-[14px_20px] w-fit rounded-xl hover:shadow-[0_12px_30px_0_#312ECB66] transition-all duration-300 font-bold text-white">Book Appointment</a>
+        <a href="{{ route('front.appointment') }}" class="bg-cp-dark-blue p-[14px_20px] w-fit rounded-xl hover:shadow-[0_12px_30px_0_#312ECB66] transition-all duration-300 font-bold text-white">Book Appointment</a>
       </div>
     </div>
     @empty
@@ -215,7 +187,7 @@
                 <p>belum ada data terbaru</p>
             @endforelse
       
-        <a href="team.html" class="view-all-card">
+        <a href="{{ route('front.team') }}" class="view-all-card">
           <div class="card bg-white flex flex-col h-full justify-center items-center p-[30px] gap-[30px] rounded-[20px] border border-white hover:shadow-[0_10px_30px_0_#D1D4DF80] hover:border-cp-dark-blue transition-all duration-300">
             <div class="w-[60px] h-[60px] flex shrink-0">
               <img src="{{asset('assets/icons/profile-2user.svg')}}" alt="icon">
@@ -345,7 +317,7 @@
               <div class="flex flex-col gap-[10px]">
                   <h2 class="font-bold text-4xl leading-[45px]">Frequently Asked Questions</h2>
               </div>
-              <a href="contact.html" class="p-5 bg-cp-black rounded-xl text-white w-fit font-bold">Contact Us</a>
+              <a href="{{ route('front.appointment') }}" class="p-5 bg-cp-black rounded-xl text-white w-fit font-bold">Contact Us</a>
           </div>
           <div class="flex flex-col gap-[30px] sm:w-[603px] shrink-0">
               <div class="flex flex-col p-5 rounded-2xl bg-white w-full">
@@ -456,7 +428,7 @@
       </div>
     </div>
     <div class="absolute -bottom-[135px] w-full">
-      <p class="font-extrabold text-[250px] leading-[375px] text-center text-white opacity-5">SHAYNA</p>
+      <p class="font-extrabold text-[250px] leading-[375px] text-center text-white opacity-5">asd</p>
     </div>
   </footer>
   <div id="video-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
